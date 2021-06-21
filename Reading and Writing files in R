@@ -1,0 +1,78 @@
+
+# While cleaning and working with data in R most of the time we have data either in excel or csv format and we are going to learn how to read these two types of files as below:
+
+# Reading excel and csv file in R
+
+## 1. Reading excel file
+   # We can read excel files by read_excel() function from readxl package 
+        read_excel (path,sheet, guess_max, ...)
+      
+   # Most frequently Arguments used:
+        # Path is path of file that we are going to read , in case our excel file has many sheet and we want to read a specific sheet we can specify sheet 
+        # either by sheet number or "name"
+        # and guess_max  is maximum number of data rows to use for guessing column types
+        # ...  any other arguments that reac_excel function may take
+
+   # Example:
+        # including library which read_excel function is come from
+          library(readxl)
+          read_excel("file_name.xlsx", sheet= "sheet_name", guess_max=5000)
+    
+    
+ ## 2. Reading CSV (comma-separated values)
+    # We can read comma-separated values with read.csv() function which has many arguments and we will learn about the most frequently argument we are using.
+    # read.csv is a variant of read.table from base R no need to include any libarary separately
+ 
+      read.csv(file, header =TRUE, stringsAsFactors = TRUE, ...)
+ 
+    # Most frequently Arguments used:
+        # file, the name of the file which the data are to be read from. 
+        # header, a logical value indicating whether the file contains the names of the variables as its first line and by default its TRUE.
+        # stringsAsFactors, by default read.csv will convert characters if files to factors if we want to avoid thiis write stringsAsFactors = FALSE
+        # ... any other arguments to be passed to read.csv
+  
+    # Example:
+      read.csv(file= "path/file_name.csv", stringsAsFactors = FALSE)
+      
+      
+      
+# Writing excel or csv files
+
+  ## 1 Writing excel file
+       # We can write excel files differently but esiest way is using write.xlsx from openxlsx package
+         write.xlsx(x, file,...)
+       
+       # Most frequent arguments used
+         x : object or a list of objects that can be handled to write to file
+         file : xlsx file name i.e you can name your file they way you want.
+         ... : optional parameters to pass to the function
+         
+       # Example:
+         
+          write.xlsx( iris, file = "./default_data/iris.xlsx")
+          OR 
+          
+          # If we have multiple objects and want to write in different excel sheets we can create list of our objects with respective sheet names then pass to write.xlsx()
+
+          list_of_objects <- list("Name of sheet 1" = object_1, "Name of sheet 2" = object_2)
+          write.xlsx(list_of_objects, file = "file_name.xlsx")
+          
+   
+   ## 2 Writing csv files  
+      # To write csv files we use write.csv function  a variant of write.table from base R 
+       
+          write.csv(x, file, ...)
+       
+      # Most frequent arguments used
+          x: the object to be written, preferably a matrix or a data frame. if not, it is attempted to coerce x to a data frame.
+          file: a character string specifying file path and name
+          ... : optional parameters to pass to the function
+          
+      # Example: 
+          
+             write.csv(iris, file = "iris_dataset.csv")
+          
+      
+    
+    
+ 
