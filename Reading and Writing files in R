@@ -12,6 +12,7 @@
         # either by sheet number or "name"
         # and guess_max  is maximum number of data rows to use for guessing column types
         # ...  any other arguments that reac_excel function may take
+        Except for the path argument the rest arguments are optional
 
    # Example:
         # including library which read_excel function is come from
@@ -30,6 +31,7 @@
         # header, a logical value indicating whether the file contains the names of the variables as its first line and by default its TRUE.
         # stringsAsFactors, by default read.csv will convert characters if files to factors if we want to avoid thiis write stringsAsFactors = FALSE
         # ... any other arguments to be passed to read.csv
+        Except for the file argument the rest arguments are optional
   
     # Example:
       read.csv(file= "path/file_name.csv", stringsAsFactors = FALSE)
