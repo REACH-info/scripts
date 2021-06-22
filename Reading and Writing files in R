@@ -4,8 +4,10 @@
 # Reading excel and csv file in R
 
 ## 1. Reading excel file
-   # We can read excel files by read_excel() function from readxl package 
+   # We can read excel files by read_excel(), read_xlsx() function from readxl package  OR read.xlsx() from openxlsx package all of them have same syntax but may different number of arugments
         read_excel (path,sheet, guess_max, ...)
+        read_xlsx(path,sheet, guess_max, ...)
+        read.xlsx(path, sheet, ...)
       
    # Most frequently Arguments used:
         # Path is path of file that we are going to read , in case our excel file has many sheet and we want to read a specific sheet we can specify sheet 
