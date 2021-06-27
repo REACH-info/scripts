@@ -7,7 +7,7 @@ library(butteR)
 # The %in% operator in R can be used to identify if an element (e.g., a number) belongs to a vector or dataframe 
 # while negating %in% do the opposite of %in% 
 
-
+# %in% operator in R, is used to identify if an element belongs to a vector or Dataframe and Negate (`%in%`) does the opposite 
 '%noin%' <- Negate('%in%')
 
 # Reading our sampling data
