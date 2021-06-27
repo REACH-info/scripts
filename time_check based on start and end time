@@ -1,0 +1,18 @@
+#time check based on start end time
+# We are passing dataset, minimum and maximum time threshold
+time_check <- function(df, time_min, time_max){
+  df <- df %>% mutate(start = ymd_hms(start), end = ymd_hms(end),
+                       
+                      # taking difference between end time and start time of interview using difftime function 
+                      interview_duration = difftime(as.POSIXct(end), as.POSIXct(start), units = "mins"),
+                      
+                      #Checking and flagging interview duration
+                      CHECK_interview_duration = case_when( 
+                        interview_duration < time_min ~ "Too short",
+                        interview_duration > time_max ~ "Too long",
+                        TRUE ~ "Okay"
+                        
+                      )
+              )
+  return(df)
+}
