@@ -1,0 +1,20 @@
+set_translation <- function(rawDF, translations, uuid_){
+  for (i in 1:length(rawDF)) {
+    for (j in 1:length(translations$question)) {
+      var_name <- unique(translations$question[j])
+      
+      for (r in 1:as.numeric(count(rawDF[i]))) {
+        #Compares the values and uuid
+        #
+        if (var_name == translations[j, ][1] & paste(rawDF[r, uuid_]) == paste(translations[j, ][4])) {
+          rawDF[r,var_name] <- translations[j, ][3]
+        }
+      }
+      # Feedback
+      cat("\014")
+      print (paste("Replacing translation", j, "of", length(translations$question)))
+    }
+    break()
+  }
+  return(rawDF)
+}
