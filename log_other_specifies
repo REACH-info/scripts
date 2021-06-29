@@ -1,0 +1,45 @@
+#Logging all the other specifies
+log_other_specifies <- function(rawDF, textFieldsDF, uuid_, meta_cols = vector()){
+  #Initiazling variables
+  uuid <- vector() 
+  question.name <- vector()
+  issue <- vector()
+  old.value <- vector()
+  #Extra columns - Blank
+  feedback <- vector()
+  new.value <- vector()
+  changed <- vector()
+  
+  #Iterates for each given columns
+  for (j in 1:nrow(textFieldsDF)) {
+    #Extracts values
+    for (rowi in 1:nrow(rawDF)){
+      value_raw <- rawDF[rowi, paste(textFieldsDF[j,])]
+      if(!is.na(value_raw)){
+        # append values to vectors
+        question.name <- c(question.name, as.character(textFieldsDF[j,]))
+        old.value <- c(old.value, as.character(value_raw))
+        uuid <- c(uuid, as.character(rawDF[rowi,uuid_]))
+        issue <- c(issue, paste("Other specify"))
+        feedback <- c(feedback, "")
+        new.value <- c(new.value, "")
+        changed <- c(changed, "")
+      }
+    }
+    # Feedback
+    cat("\014")
+    print (paste("Getting other specify column", j, "of", nrow(textFieldsDF)))
+  }
+  
+  if(length(uuid) > 0){
+    #Filter meta columns only for logged rows
+    extra_cols <- rawDF %>% filter(`_uuid` %in% uuid) %>% select(uuid = `_uuid`, meta_cols)
+    #Create data frame for grabbed logs
+    others_log <- data.frame(uuid, question.name, old.value, issue, feedback, new.value, changed)
+    others_log <- others_log %>% left_join(extra_cols, by = c("uuid"))
+    return(others_log)
+  }else{
+    print("Nothing to log!")
+    return(NULL)
+  }
+}
